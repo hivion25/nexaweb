@@ -1,0 +1,54 @@
+/* ==========================================================
+   NEXA WEB — shared kit for the portfolio demo pages.
+   Each demo keeps its own client identity; this file only adds
+   the NEXA bar, entrance motion and interaction polish.
+   html.in-frame  → page is shown as a preview inside index.html (kept static)
+   html.demo-live → page opened on its own
+   ========================================================== */
+:focus-visible { outline: 2px solid #3b82f6; outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- NEXA bar ---------- */
+.nexa-bar {
+  position: fixed; z-index: 100; bottom: 18px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 6px; padding: 6px; max-width: calc(100vw - 24px);
+  border-radius: 999px; border: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(8, 12, 26, .82); color: #f4f6fc;
+  -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 20px 50px -18px rgba(3, 5, 12, .8), inset 0 1px 0 rgba(255, 255, 255, .08);
+  font: 500 14px/1.4 "IBM Plex Sans Arabic", Tajawal, Tahoma, sans-serif;
+}
+.nexa-bar a { color: inherit; text-decoration: none; }
+.nexa-bar .nb-brand { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px 6px 14px; white-space: nowrap; }
+.nexa-bar .nb-brand svg { width: 24px; height: 24px; flex: none; }
+.nexa-bar .nb-brand small { color: #9ea8c0; font-size: 13px; }
+.nexa-bar .nb-brand b { font: 700 13px "Space Grotesk", sans-serif; letter-spacing: .12em; }
+.nexa-bar .nb-link {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border-radius: 999px; white-space: nowrap;
+  transition: background-color .2s, transform .25s cubic-bezier(.22, 1, .36, 1);
+}
+.nexa-bar .nb-link:hover { background: rgba(255, 255, 255, .08); }
+.nexa-bar .nb-cta { background: linear-gradient(120deg, #2563eb, #5b4cf0 55%, #9333ea); font-weight: 600; box-shadow: 0 8px 20px -8px rgba(99, 72, 255, .9); }
+.nexa-bar .nb-cta:hover { background: linear-gradient(120deg, #2563eb, #5b4cf0 55%, #9333ea); transform: translateY(-1px); }
+.nexa-bar .nb-link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nexa-bar .nb-sep { width: 1px; height: 22px; background: rgba(255, 255, 255, .14); }
+
+.demo-live body { padding-bottom: 88px; }
+.demo-live .nexa-bar { animation: nb-in .7s .5s cubic-bezier(.34, 1.4, .64, 1) both; }
+@keyframes nb-in { from { opacity: 0; transform: translate(-50%, 24px) scale(.96); } to { opacity: 1; transform: translate(-50%, 0); } }
+.in-frame .nexa-bar { display: none; }
+
+/* ---------- Entrance motion (live pages only) ---------- */
+.demo-live .enter { animation: demo-enter .9s cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
+@keyframes demo-enter { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+/* previews inside the homepage must look finished immediately */
+.in-frame *, .in-frame *::before, .in-frame *::after { animation: none !important; transition: none !important; }
+
+@media (max-width: 640px) {
+  .nexa-bar { bottom: 12px; width: calc(100vw - 24px); justify-content: space-between; }
+  .nexa-bar .nb-brand small, .nexa-bar .nb-sep, .nexa-bar .nb-back span { display: none; }
+  .nexa-bar .nb-brand { padding-inline: 10px 4px; }
+  .nexa-bar .nb-link { padding: 0 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}

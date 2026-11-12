@@ -44,28 +44,55 @@
   td { padding:11px 10px; border-bottom:1px solid var(--line); } tr:last-child td { border:0; }
   .st { font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
   .s1 { background:#e3f7ee; color:var(--green); } .s2 { background:#fff3d6; color:var(--amber); } .s3 { background:#e8efff; color:var(--blue); }
-  .demo-tag { position:fixed; bottom:16px; left:16px; padding:8px 14px; border-radius:999px; background:#0b1020; color:#fff; font-size:13px; }
   @media (max-width:860px) { .app { grid-template-columns:1fr; } aside { display:none; } main { padding:16px; } .kpis { grid-template-columns:1fr 1fr; } .mid { grid-template-columns:1fr; } .bar div:last-child { display:none; } .wide { overflow-x:auto; } }
+
+  /* --- polish --- */
+  aside a { transition:background-color .2s, color .2s; } aside a:not(.on):hover { background:rgba(255,255,255,.06); color:#fff; }
+  .pill { transition:border-color .2s, box-shadow .2s, filter .2s; } .pill:hover { border-color:#c9d3ea; }
+  .pill.go:hover { filter:brightness(1.08); box-shadow:0 8px 18px -8px rgba(47,107,255,.7); }
+  .box { transition:box-shadow .3s, translate .3s cubic-bezier(.22,1,.36,1); }
+  .kpi:hover { translate:0 -3px; box-shadow:0 14px 30px -18px rgba(16,24,40,.35); }
+  tr:not(:first-child) td { transition:background-color .15s; } tr:not(:first-child):hover td { background:#f8faff; }
+  .chart i { transition:filter .2s; } .chart i:hover { filter:brightness(1.15); }
+  .demo-live .chart i { animation:grow 1s cubic-bezier(.22,1,.36,1) both; transform-origin:bottom; }
+  .demo-live .chart div:nth-child(2) i { animation-delay:.06s; } .demo-live .chart div:nth-child(3) i { animation-delay:.12s; }
+  .demo-live .chart div:nth-child(4) i { animation-delay:.18s; } .demo-live .chart div:nth-child(5) i { animation-delay:.24s; }
+  .demo-live .chart div:nth-child(6) i { animation-delay:.3s; } .demo-live .chart div:nth-child(7) i { animation-delay:.36s; }
+  @keyframes grow { from { transform:scaleY(0); } }
+
+  /* --- icons, sparklines, avatars --- */
+  aside a i { display:grid; place-items:center; width:18px; height:18px; background:none; color:#64748b; }
+  aside a.on i { background:none; color:#8fb0ff; }
+  aside a i svg { width:18px; height:18px; }
+  .kpi { position:relative; overflow:hidden; }
+  .spark { position:absolute; left:16px; bottom:16px; width:96px; height:36px; }
+  .spark .l { fill:none; stroke:var(--blue); stroke-width:2; vector-effect:non-scaling-stroke; stroke-linejoin:round; }
+  .spark .a { fill:rgba(47,107,255,.10); }
+  .spark.neg .l { stroke:var(--red); } .spark.neg .a { fill:rgba(229,72,77,.08); }
+  .who { display:inline-flex; align-items:center; gap:8px; }
+  .who i { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; font-style:normal; font-size:11px; font-weight:700; color:#fff; background:hsl(var(--h) 65% 55%); }
 </style>
+<link rel="stylesheet" href="demo-kit.css" />
+<script>document.documentElement.classList.add(window.self !== window.top ? 'in-frame' : 'demo-live');</script>
 </head>
 <body>
   <div class="app">
     <aside>
       <div class="logo"><i></i>لوحتي</div>
-      <a class="on" href="#"><i></i>الرئيسية</a><a href="#"><i></i>الطلبات</a><a href="#"><i></i>المنتجات</a><a href="#"><i></i>العملاء</a><a href="#"><i></i>التقارير</a><a href="#"><i></i>الإعدادات</a>
+      <a class="on" href="#"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></i>الرئيسية</a><a href="#"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8H8M16 12H8M13 16H8"/></svg></i>الطلبات</a><a href="#"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></i>المنتجات</a><a href="#"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></i>العملاء</a><a href="#"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></i>التقارير</a><a href="#"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></i>الإعدادات</a>
       <small>الخطة الحالية: احترافية</small>
     </aside>
     <main>
-      <div class="bar"><div><h1>نظرة عامة</h1><p>ملخص أداء المتجر خلال آخر 30 يومًا</p></div><div><span class="pill">آخر 30 يومًا</span><a class="pill go" href="#">+ طلب جديد</a></div></div>
+      <div class="bar enter"><div><h1>نظرة عامة</h1><p>ملخص أداء المتجر خلال آخر 30 يومًا</p></div><div><span class="pill">آخر 30 يومًا</span><a class="pill go" href="#">+ طلب جديد</a></div></div>
 
-      <div class="kpis">
-        <div class="box kpi"><span>المبيعات</span><b>84,320 ر.س</b><em class="up">+12.4%</em></div>
-        <div class="box kpi"><span>الطلبات</span><b>1,248</b><em class="up">+8.1%</em></div>
-        <div class="box kpi"><span>عملاء جدد</span><b>312</b><em class="up">+5.6%</em></div>
-        <div class="box kpi"><span>المرتجعات</span><b>18</b><em class="down">-2.3%</em></div>
+      <div class="kpis enter" style="--i:1">
+        <div class="box kpi"><span>المبيعات</span><b>84,320 ر.س</b><em class="up">+12.4%</em><svg class="spark " viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="a" d="M0 24 L12 20 L24 22 L36 15 L48 17 L60 10 L72 12 L84 6 L100 4 L100 30 L0 30Z"/><path class="l" d="M0 24 L12 20 L24 22 L36 15 L48 17 L60 10 L72 12 L84 6 L100 4"/></svg></div>
+        <div class="box kpi"><span>الطلبات</span><b>1,248</b><em class="up">+8.1%</em><svg class="spark " viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="a" d="M0 24 L12 20 L24 22 L36 15 L48 17 L60 10 L72 12 L84 6 L100 4 L100 30 L0 30Z"/><path class="l" d="M0 24 L12 20 L24 22 L36 15 L48 17 L60 10 L72 12 L84 6 L100 4"/></svg></div>
+        <div class="box kpi"><span>عملاء جدد</span><b>312</b><em class="up">+5.6%</em><svg class="spark " viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="a" d="M0 24 L12 20 L24 22 L36 15 L48 17 L60 10 L72 12 L84 6 L100 4 L100 30 L0 30Z"/><path class="l" d="M0 24 L12 20 L24 22 L36 15 L48 17 L60 10 L72 12 L84 6 L100 4"/></svg></div>
+        <div class="box kpi"><span>المرتجعات</span><b>18</b><em class="down">-2.3%</em><svg class="spark neg" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="a" d="M0 8 L14 10 L28 7 L42 14 L56 12 L70 18 L84 16 L100 22 L100 30 L0 30Z"/><path class="l" d="M0 8 L14 10 L28 7 L42 14 L56 12 L70 18 L84 16 L100 22"/></svg></div>
       </div>
 
-      <div class="mid">
+      <div class="mid enter" style="--i:2">
         <div class="box"><h2>المبيعات الشهرية <span>هذا العام / العام الماضي</span></h2>
           <div class="chart">
             <div><i style="height:45%"></i><i style="height:35%"></i></div><div><i style="height:58%"></i><i style="height:42%"></i></div>
@@ -85,16 +112,21 @@
         </div>
       </div>
 
-      <div class="box wide"><h2>أحدث الطلبات <span>عرض الكل</span></h2>
+      <div class="box wide enter" style="--i:3"><h2>أحدث الطلبات <span>عرض الكل</span></h2>
         <table>
           <tr><th>رقم الطلب</th><th>العميل</th><th>المنتج</th><th>المبلغ</th><th>الحالة</th></tr>
-          <tr><td>#2051</td><td>عميل 1</td><td>طقم تحضير</td><td>389 ر.س</td><td><span class="st s1">مكتمل</span></td></tr>
-          <tr><td>#2050</td><td>عميل 2</td><td>اشتراك شهري</td><td>249 ر.س</td><td><span class="st s2">قيد التجهيز</span></td></tr>
-          <tr><td>#2049</td><td>عميل 3</td><td>قهوة 250 جم × 2</td><td>120 ر.س</td><td><span class="st s3">تم الشحن</span></td></tr>
+          <tr><td>#2051</td><td><span class="who"><i style="--h:220">ع</i>عميل 1</span></td><td>طقم تحضير</td><td>389 ر.س</td><td><span class="st s1">مكتمل</span></td></tr>
+          <tr><td>#2050</td><td><span class="who"><i style="--h:160">ع</i>عميل 2</span></td><td>اشتراك شهري</td><td>249 ر.س</td><td><span class="st s2">قيد التجهيز</span></td></tr>
+          <tr><td>#2049</td><td><span class="who"><i style="--h:280">ع</i>عميل 3</span></td><td>قهوة 250 جم × 2</td><td>120 ر.س</td><td><span class="st s3">تم الشحن</span></td></tr>
         </table>
       </div>
     </main>
   </div>
-  <a class="demo-tag" href="../index.html#work">نموذج تصميم · NEXA WEB</a>
+  <nav class="nexa-bar" aria-label="NEXA WEB">
+    <a class="nb-brand" href="../index.html" aria-label="نكسا ويب — الرئيسية"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H14v28H7.5A2.5 2.5 0 0 1 5 31.5z" fill="#22d3ee"/><path d="M26 6h6.5A2.5 2.5 0 0 1 35 8.5v23a2.5 2.5 0 0 1-2.5 2.5H26z" fill="#a855f7"/><path d="M7.5 6H15l20 28h-7.5a3 3 0 0 1-2.4-1.2L5.6 9.2A2 2 0 0 1 7.5 6z" fill="#4f6bff"/></svg><small>نموذج تصميم من</small><b>NEXA WEB</b></a>
+    <span class="nb-sep" aria-hidden="true"></span>
+    <a class="nb-link nb-back" href="../index.html#work"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><span>كل الأعمال</span></a>
+    <a class="nb-link nb-cta" href="../index.html#contact">اطلب تصميمًا مشابهًا</a>
+  </nav>
 </body>
 </html>
