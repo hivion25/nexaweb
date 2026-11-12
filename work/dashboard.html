@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>نموذج تصميم — لوحة تحكم | NEXA WEB</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink:#101828; --bg:#f4f6fb; --side:#0f172a; --blue:#2f6bff; --muted:#667085; --line:#e6e9f2; --green:#12a26b; --red:#e5484d; --amber:#d98a00; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; font-size:14px; }
+  a { color:inherit; text-decoration:none; }
+  .app { display:grid; grid-template-columns:230px 1fr; min-height:100vh; }
+  aside { background:var(--side); color:#cbd5e1; padding:22px 16px; display:flex; flex-direction:column; gap:6px; }
+  .logo { display:flex; align-items:center; gap:10px; color:#fff; font-weight:700; font-size:18px; margin-bottom:20px; }
+  .logo i { width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#2f6bff,#8b5cf6); }
+  aside a { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; }
+  aside a i { width:16px; height:16px; border-radius:5px; background:#334155; }
+  aside a.on { background:rgba(47,107,255,.2); color:#fff; } aside a.on i { background:var(--blue); }
+  aside small { margin-top:auto; padding:12px; border-radius:12px; background:#1e293b; }
+  main { padding:24px 28px; display:grid; gap:20px; align-content:start; }
+  .bar { display:flex; justify-content:space-between; align-items:center; }
+  h1 { font-size:24px; } .bar p { color:var(--muted); }
+  .bar div:last-child { display:flex; gap:10px; align-items:center; }
+  .pill { padding:9px 16px; border-radius:10px; background:#fff; border:1px solid var(--line); color:var(--muted); }
+  .pill.go { background:var(--blue); color:#fff; border-color:var(--blue); font-weight:600; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .box { background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; }
+  .kpi span { color:var(--muted); } .kpi b { display:block; font-size:28px; line-height:1.4; }
+  .kpi em { font-style:normal; font-size:12px; font-weight:600; padding:2px 8px; border-radius:999px; }
+  .up { background:#e3f7ee; color:var(--green); } .down { background:#fdeaea; color:var(--red); }
+  .mid { display:grid; grid-template-columns:1.7fr 1fr; gap:16px; }
+  .box h2 { font-size:16px; margin-bottom:14px; display:flex; justify-content:space-between; } .box h2 span { color:var(--muted); font-weight:400; font-size:13px; }
+  .chart { display:flex; align-items:flex-end; gap:14px; height:190px; padding-top:10px; border-bottom:1px solid var(--line);
+           background:repeating-linear-gradient(0deg,transparent 0 46px,var(--line) 46px 47px); }
+  .chart div { flex:1; display:flex; gap:4px; align-items:flex-end; height:100%; }
+  .chart i { flex:1; border-radius:6px 6px 0 0; background:var(--blue); } .chart i + i { background:#c7d6ff; }
+  .months { display:flex; gap:14px; color:var(--muted); font-size:12px; margin-top:8px; } .months span { flex:1; text-align:center; }
+  .donut { width:150px; height:150px; border-radius:50%; margin:6px auto 16px; background:conic-gradient(var(--blue) 0 52%,#8b5cf6 52% 78%,#19c2a0 78% 92%,#e6e9f2 92%); display:grid; place-items:center; }
+  .donut b { width:96px; height:96px; border-radius:50%; background:#fff; display:grid; place-items:center; font-size:20px; }
+  .legend { display:grid; gap:8px; } .legend div { display:flex; justify-content:space-between; color:var(--muted); }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-inline-end:8px; }
+  table { width:100%; border-collapse:collapse; } th { text-align:start; color:var(--muted); font-weight:500; padding:8px 10px; border-bottom:1px solid var(--line); }
+  td { padding:11px 10px; border-bottom:1px solid var(--line); } tr:last-child td { border:0; }
+  .st { font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  .s1 { background:#e3f7ee; color:var(--green); } .s2 { background:#fff3d6; color:var(--amber); } .s3 { background:#e8efff; color:var(--blue); }
+  .demo-tag { position:fixed; bottom:16px; left:16px; padding:8px 14px; border-radius:999px; background:#0b1020; color:#fff; font-size:13px; }
+  @media (max-width:860px) { .app { grid-template-columns:1fr; } aside { display:none; } main { padding:16px; } .kpis { grid-template-columns:1fr 1fr; } .mid { grid-template-columns:1fr; } .bar div:last-child { display:none; } .wide { overflow-x:auto; } }
+</style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="logo"><i></i>لوحتي</div>
+      <a class="on" href="#"><i></i>الرئيسية</a><a href="#"><i></i>الطلبات</a><a href="#"><i></i>المنتجات</a><a href="#"><i></i>العملاء</a><a href="#"><i></i>التقارير</a><a href="#"><i></i>الإعدادات</a>
+      <small>الخطة الحالية: احترافية</small>
+    </aside>
+    <main>
+      <div class="bar"><div><h1>نظرة عامة</h1><p>ملخص أداء المتجر خلال آخر 30 يومًا</p></div><div><span class="pill">آخر 30 يومًا</span><a class="pill go" href="#">+ طلب جديد</a></div></div>
+
+      <div class="kpis">
+        <div class="box kpi"><span>المبيعات</span><b>84,320 ر.س</b><em class="up">+12.4%</em></div>
+        <div class="box kpi"><span>الطلبات</span><b>1,248</b><em class="up">+8.1%</em></div>
+        <div class="box kpi"><span>عملاء جدد</span><b>312</b><em class="up">+5.6%</em></div>
+        <div class="box kpi"><span>المرتجعات</span><b>18</b><em class="down">-2.3%</em></div>
+      </div>
+
+      <div class="mid">
+        <div class="box"><h2>المبيعات الشهرية <span>هذا العام / العام الماضي</span></h2>
+          <div class="chart">
+            <div><i style="height:45%"></i><i style="height:35%"></i></div><div><i style="height:58%"></i><i style="height:42%"></i></div>
+            <div><i style="height:50%"></i><i style="height:48%"></i></div><div><i style="height:72%"></i><i style="height:55%"></i></div>
+            <div><i style="height:64%"></i><i style="height:50%"></i></div><div><i style="height:88%"></i><i style="height:62%"></i></div>
+            <div><i style="height:78%"></i><i style="height:66%"></i></div>
+          </div>
+          <div class="months"><span>يناير</span><span>فبراير</span><span>مارس</span><span>أبريل</span><span>مايو</span><span>يونيو</span><span>يوليو</span></div>
+        </div>
+        <div class="box"><h2>مصادر الطلبات</h2>
+          <div class="donut"><b>1,248</b></div>
+          <div class="legend">
+            <div><span><i style="background:#2f6bff"></i>المتجر</span><b>52%</b></div>
+            <div><span><i style="background:#8b5cf6"></i>التطبيق</span><b>26%</b></div>
+            <div><span><i style="background:#19c2a0"></i>واتساب</span><b>14%</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box wide"><h2>أحدث الطلبات <span>عرض الكل</span></h2>
+        <table>
+          <tr><th>رقم الطلب</th><th>العميل</th><th>المنتج</th><th>المبلغ</th><th>الحالة</th></tr>
+          <tr><td>#2051</td><td>عميل 1</td><td>طقم تحضير</td><td>389 ر.س</td><td><span class="st s1">مكتمل</span></td></tr>
+          <tr><td>#2050</td><td>عميل 2</td><td>اشتراك شهري</td><td>249 ر.س</td><td><span class="st s2">قيد التجهيز</span></td></tr>
+          <tr><td>#2049</td><td>عميل 3</td><td>قهوة 250 جم × 2</td><td>120 ر.س</td><td><span class="st s3">تم الشحن</span></td></tr>
+        </table>
+      </div>
+    </main>
+  </div>
+  <a class="demo-tag" href="../index.html#work">نموذج تصميم · NEXA WEB</a>
+</body>
+</html>

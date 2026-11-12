@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>نموذج تصميم — تطبيق جوال | NEXA WEB</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink:#1b1736; --violet:#6d4aff; --soft:#f3f0ff; --muted:#8a86a3; --line:#ece9f7; --mint:#19c2a0; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif; color:var(--ink); min-height:100vh; line-height:1.6;
+         background:radial-gradient(700px 500px at 85% 0%,#8f73ff,transparent 70%),radial-gradient(600px 500px at 0% 100%,#3ad1c0,transparent 70%),#4c2fd6; }
+  a { color:inherit; text-decoration:none; }
+  .stage { max-width:1200px; margin-inline:auto; padding:40px 32px 70px; display:grid; grid-template-columns:.8fr repeat(3,auto); gap:34px; align-items:center; justify-content:center; }
+  .intro { color:#fff; max-width:270px; }
+  .intro small { display:inline-block; padding:5px 14px; border-radius:999px; background:rgba(255,255,255,.16); font-weight:600; margin-bottom:16px; }
+  .intro h1 { font-size:40px; line-height:1.3; font-weight:700; }
+  .intro p { opacity:.85; font-size:17px; margin-top:12px; }
+  .phone { width:258px; height:540px; border-radius:40px; background:#fff; border:8px solid #15112b; box-shadow:0 40px 70px rgba(20,10,70,.45); overflow:hidden; display:flex; flex-direction:column; position:relative; font-size:13px; }
+  .phone::before { content:""; position:absolute; top:8px; left:50%; translate:-50%; width:78px; height:20px; border-radius:999px; background:#15112b; z-index:2; }
+  .phone:nth-of-type(3) { margin-top:-50px; }
+  .screen { flex:1; padding:40px 16px 12px; display:flex; flex-direction:column; gap:12px; overflow:hidden; }
+  .hello { display:flex; justify-content:space-between; align-items:center; }
+  .hello b { font-size:17px; display:block; } .hello span { color:var(--muted); font-size:12px; }
+  .ava { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--violet),#ff8fb1); }
+  .find { padding:10px 14px; border-radius:14px; background:var(--soft); color:var(--muted); }
+  .promo { border-radius:18px; padding:14px; color:#fff; background:linear-gradient(120deg,var(--violet),#9b6bff); }
+  .promo b { font-size:16px; display:block; } .promo span { opacity:.85; font-size:12px; }
+  .promo em { display:inline-block; margin-top:8px; font-style:normal; font-weight:600; padding:4px 12px; border-radius:999px; background:#fff; color:var(--violet); font-size:12px; }
+  .cats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; text-align:center; font-size:11px; color:var(--muted); }
+  .cats i { display:block; height:44px; border-radius:14px; margin-bottom:4px; background:var(--soft); }
+  .cats div:nth-child(1) i { background:#ffe9d6; } .cats div:nth-child(2) i { background:#d9f6ee; } .cats div:nth-child(3) i { background:#ffe0ea; }
+  .title { display:flex; justify-content:space-between; font-weight:600; font-size:14px; } .title a { color:var(--violet); font-size:12px; }
+  .place { display:flex; gap:10px; align-items:center; padding:8px; border:1px solid var(--line); border-radius:16px; }
+  .place i { width:52px; height:52px; border-radius:12px; flex:none; background:linear-gradient(135deg,#ffd9a8,#ff9f7a); }
+  .place:nth-of-type(2) i { background:linear-gradient(135deg,#bdf0e2,#3ad1c0); }
+  .place b { display:block; font-size:13px; } .place span { color:var(--muted); font-size:11px; }
+  .place u { margin-inline-start:auto; text-decoration:none; font-weight:600; font-size:12px; color:var(--violet); }
+  .tabs { display:grid; grid-template-columns:repeat(4,1fr); padding:10px 16px 14px; border-top:1px solid var(--line); }
+  .tabs i { width:22px; height:22px; border-radius:7px; background:var(--line); margin-inline:auto; } .tabs i.on { background:var(--violet); }
+
+  .map { height:200px; border-radius:20px; position:relative; overflow:hidden; background:#e9f1ec;
+         background-image:linear-gradient(#fff 0 0),linear-gradient(#fff 0 0),linear-gradient(#fff 0 0),linear-gradient(#fff 0 0);
+         background-size:100% 10px,10px 100%,100% 8px,8px 100%; background-position:0 62px,70px 0,0 140px,170px 0; background-repeat:no-repeat; }
+  .map::before { content:""; position:absolute; top:66px; right:36px; width:120px; height:78px; border:4px solid var(--violet); border-color:var(--violet) transparent transparent var(--violet); border-radius:14px 0 0 0; }
+  .pin { position:absolute; width:20px; height:20px; border-radius:50%; border:5px solid #fff; box-shadow:0 4px 10px rgba(0,0,0,.25); }
+  .pin.a { top:56px; right:26px; background:var(--violet); } .pin.b { top:134px; right:150px; background:var(--mint); }
+  .eta { display:flex; justify-content:space-between; align-items:center; }
+  .eta b { font-size:22px; } .eta span { color:var(--muted); font-size:12px; display:block; }
+  .eta em { font-style:normal; padding:5px 12px; border-radius:999px; background:#d9f6ee; color:#0c8f75; font-weight:600; font-size:12px; }
+  .steps { display:grid; gap:12px; }
+  .steps div { display:flex; gap:10px; align-items:center; color:var(--muted); }
+  .steps i { width:16px; height:16px; border-radius:50%; border:2px solid var(--line); flex:none; }
+  .steps .ok { color:var(--ink); font-weight:500; } .steps .ok i { background:var(--violet); border-color:var(--violet); }
+  .cta { margin-top:auto; text-align:center; padding:13px; border-radius:16px; background:var(--violet); color:#fff; font-weight:600; font-size:14px; }
+
+  .line { display:flex; gap:10px; align-items:center; padding-bottom:12px; border-bottom:1px solid var(--line); }
+  .line i { width:48px; height:48px; border-radius:12px; flex:none; background:linear-gradient(135deg,#ffd9a8,#ff9f7a); }
+  .line:nth-of-type(2) i { background:linear-gradient(135deg,#e0d6ff,#9b6bff); } .line:nth-of-type(3) i { background:linear-gradient(135deg,#bdf0e2,#3ad1c0); }
+  .line b { display:block; font-size:13px; } .line span { color:var(--muted); font-size:11px; }
+  .line u { margin-inline-start:auto; text-decoration:none; font-weight:600; }
+  .sum { display:grid; gap:6px; color:var(--muted); } .sum div { display:flex; justify-content:space-between; }
+  .sum .total { color:var(--ink); font-weight:700; font-size:16px; padding-top:8px; border-top:1px dashed var(--line); }
+  .pay { display:flex; justify-content:space-between; padding:10px 12px; border-radius:14px; background:var(--soft); font-weight:500; }
+  .demo-tag { position:fixed; bottom:16px; left:16px; padding:8px 14px; border-radius:999px; background:#0b1020; color:#fff; font-size:13px; }
+  @media (max-width:1100px) { .stage { grid-template-columns:1fr; justify-items:center; text-align:center; gap:26px; padding:28px 16px 70px; } .phone:nth-of-type(3) { margin-top:0; } }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="intro"><small>تطبيق توصيل</small><h1>طلبك يوصلك في دقائق</h1><p>تجربة طلب بسيطة: اختر، ادفع، وتابع المندوب على الخريطة.</p></div>
+
+    <div class="phone">
+      <div class="screen">
+        <div class="hello"><div><span>أهلًا بك 👋</span><b>وش تطلب اليوم؟</b></div><i class="ava"></i></div>
+        <div class="find">ابحث عن مطعم أو منتج…</div>
+        <div class="promo"><b>توصيل مجاني</b><span>على أول ثلاث طلبات</span><br><em>اطلب الآن</em></div>
+        <div class="cats"><div><i></i>مطاعم</div><div><i></i>بقالة</div><div><i></i>حلويات</div><div><i></i>المزيد</div></div>
+        <div class="title"><span>الأقرب لك</span><a href="#">الكل</a></div>
+        <div class="place"><i></i><div><b>مطبخ الدار</b><span>20 دقيقة · ★ 4.8</span></div><u>اطلب</u></div>
+        <div class="place"><i></i><div><b>سلة الخضار</b><span>15 دقيقة · ★ 4.6</span></div><u>اطلب</u></div>
+      </div>
+      <div class="tabs"><i class="on"></i><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="phone">
+      <div class="screen">
+        <div class="title" style="font-size:16px"><span>تتبع الطلب</span><a href="#">#2048</a></div>
+        <div class="map"><span class="pin a"></span><span class="pin b"></span></div>
+        <div class="eta"><div><span>الوصول المتوقع</span><b>12 دقيقة</b></div><em>في الطريق</em></div>
+        <div class="steps">
+          <div class="ok"><i></i>تم استلام الطلب</div>
+          <div class="ok"><i></i>جاري التحضير</div>
+          <div class="ok"><i></i>المندوب في الطريق</div>
+          <div><i></i>تم التوصيل</div>
+        </div>
+        <div class="cta">اتصل بالمندوب</div>
+      </div>
+    </div>
+
+    <div class="phone">
+      <div class="screen">
+        <div class="title" style="font-size:16px"><span>السلة</span><a href="#">3 منتجات</a></div>
+        <div class="line"><i></i><div><b>وجبة مشاوي</b><span>× 1</span></div><u>48 ر.س</u></div>
+        <div class="line"><i></i><div><b>عصير طازج</b><span>× 2</span></div><u>24 ر.س</u></div>
+        <div class="line"><i></i><div><b>سلطة خضراء</b><span>× 1</span></div><u>16 ر.س</u></div>
+        <div class="pay"><span>طريقة الدفع</span><span>مدى ••42</span></div>
+        <div class="sum"><div><span>المجموع</span><span>88 ر.س</span></div><div><span>التوصيل</span><span>مجاني</span></div><div class="total"><span>الإجمالي</span><span>88 ر.س</span></div></div>
+        <div class="cta">تأكيد الطلب</div>
+      </div>
+    </div>
+  </div>
+  <a class="demo-tag" href="../index.html#work">نموذج تصميم · NEXA WEB</a>
+</body>
+</html>
